@@ -1,15 +1,15 @@
 class Solution {
 public:
-    int solve(vector<int> &nums, vector<int> &dp, int idx){
-        if(idx >= size(nums)) return 0;
+    int rob(vector<int>& v) {
+        if(v.size() == 1) return v[0];
         
-        if(dp[idx] != -1) return dp[idx];
+        vector<int> dp(v);
         
-        return dp[idx] = max(solve(nums, dp, idx+1), nums[idx]+solve(nums, dp, idx+2));
-    }
-    
-    int rob(vector<int>& nums) {
-        vector<int> dp(size(nums), -1);
-        return solve(nums, dp, 0);
+        dp[1] = max(v[0], v[1]);
+        
+        for(int i=2; i<size(v); i++){
+            dp[i] = max(dp[i-1], v[i]+dp[i-2]);
+        }
+        return dp.back();
     }
 };
