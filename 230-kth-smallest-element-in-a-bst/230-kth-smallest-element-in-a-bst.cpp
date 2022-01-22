@@ -10,26 +10,15 @@
  * };
  */
 class Solution {
-
-    private:
-    priority_queue<int, vector<int>, greater<int>> pq;
-    
-    void solve(TreeNode* root){
-        
-        if(!root) return;
-        
-        pq.push(root->val);
-        solve(root->left);
-        solve(root->right);
-    }
-    
-    public:
-    int kthSmallest(TreeNode* root, int k) {
-        solve(root);
-        
-        while(k>1){
-            pq.pop();k--;
+public:
+    int kthSmallest(TreeNode* root, int &k) {
+        if(root){
+            int x = kthSmallest(root->left, k);
+            
+            if(!k) return x;
+            else if(!--k) return root->val;
+            else return kthSmallest(root->right, k);
         }
-        return pq.top();
+        return -1;
     }
 };
