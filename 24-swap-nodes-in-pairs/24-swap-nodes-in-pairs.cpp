@@ -12,7 +12,8 @@ class Solution {
 public:
     ListNode *reverseK(ListNode *&head, int k) {
         
-        if(!head || !head->next) return head;
+        if(!head) return nullptr;
+        if(!head->next)  return head;
         
         ListNode *prevptr = NULL, *currptr = head, *nextptr;
         int count = 0;
