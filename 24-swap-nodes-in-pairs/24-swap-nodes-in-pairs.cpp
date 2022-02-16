@@ -32,6 +32,7 @@ public:
         return prevptr;
     }
     ListNode* swapPairs(ListNode* head) {
+        if(!head) return nullptr;
         return reverseK(head, 2);
     }
 };
