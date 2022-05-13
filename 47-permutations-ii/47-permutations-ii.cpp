@@ -1,37 +1,22 @@
 class Solution {
 public:
 
-    void permutation(vector<int> &v) {
-        if(v.size() <= 1) return;
-
-        int pos = 0;
-
-        for(int i=v.size()-2; i>=0; i--) {
-            if(v[i] < v[i+1]) {
-                pos = i;
-                break;
-            }
+    void permutation(vector<int> v, vector<vector<int> > &res, int idx) {
+        if(idx == v.size()) {
+            res.push_back(v);
         }
 
-        for(int i=v.size()-1; i>=pos; i--) {
-            if(v[pos] < v[i]) {
-                swap(v[i], v[pos]);
-                pos++;
-                break;
-            }
+        for(int i=idx; i<v.size(); i++) {
+            if(i != idx && v[i]==v[idx]) continue;
+            swap(v[i], v[idx]);
+            permutation(v, res, idx+1);
         }
-
-        reverse(begin(v) + pos, end(v));
     }
-
+     
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         vector<vector<int> > res;
-        vector<int> initial(nums);
-        do {
-            res.push_back(nums);
-            permutation(nums);
-        }while(nums != initial);
-
+        sort(begin(nums), end(nums));
+        permutation(nums, res, 0);
         return res;
     }
 };
