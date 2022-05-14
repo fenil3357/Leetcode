@@ -3,24 +3,25 @@ public:
     Node* connect(Node* root) {
         if(!root) return NULL;
 
-        queue<Node*> q;
-        q.push(root);
+        Node* head = root;
 
-
-        while(!q.empty()) {
+        while(head) {
             Node* dummyNode = new Node(0);
-            int n = q.size();
+            Node* tmp = dummyNode;
 
-            while(n-- > 0) {
-                Node* curr = q.front();
-                q.pop();
-
-                dummyNode->next = curr;
-                dummyNode = dummyNode->next;
-
-                if(curr->left) q.push(curr->left);
-                if(curr->right) q.push(curr->right);           
+            while(head) {
+                if(head->left) {
+                    tmp->next = head->left;
+                    tmp = tmp->next;
+                }
+                if(head->right) {
+                    tmp->next = head->right;
+                    tmp = tmp->next;
+                }
+                head = head->next;
             }
+
+            head = dummyNode->next;
         }
 
         return root;
