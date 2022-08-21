@@ -11,7 +11,7 @@ public:
             if(curr >= target) break;
             
             while(curr < stations[i][0]) {
-                if(pq.empty()) {
+                if(pq.empty()) { // Out of fuel in somewhere middle 
                     flg = 1;
                     break;
                 }
@@ -32,7 +32,7 @@ public:
             pq.pop();
         }
         
-        if(curr < target) return -1;
+        if(curr < target) return -1; // couldn't reach target 
         
         return ans;
     }
